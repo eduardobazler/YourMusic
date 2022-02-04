@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 class Form extends React.Component {
   render() {
-    const { buttonSearchTrue, inputSearch, handleChange } = this.props;
+    const { buttonSearchTrue, inputSearch, handleChange, handleClick } = this.props;
     return (
       <form>
         <input
@@ -22,6 +22,7 @@ class Form extends React.Component {
           type="button"
           data-testid="search-artist-button"
           disabled={ buttonSearchTrue }
+          onClick={ handleClick }
         >
           Pesquisar
         </Button>
@@ -34,6 +35,7 @@ Form.propTypes = {
   buttonSearchTrue: PropTypes.bool.isRequired,
   inputSearch: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default Form;
