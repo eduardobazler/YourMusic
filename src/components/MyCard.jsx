@@ -11,24 +11,35 @@ class MyCard extends React.Component {
     const { album } = this.props;
     const { artworkUrl100, collectionName, artistName } = album;
     return (
-      <Card sx={ { maxWidth: 220, minWidth: 220, margin: '10px' } }>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={ artworkUrl100 }
-            alt="image capa cd"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {collectionName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {artistName}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+      <div>
+        <Card sx={ { maxWidth: 220, minWidth: 220, margin: '10px' } }>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="140"
+              image={ artworkUrl100 }
+              alt="image capa cd"
+            />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                data-testid="album-name"
+              >
+                {collectionName}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                data-testid="artist-name"
+              >
+                {artistName}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </div>
     );
   }
 }
