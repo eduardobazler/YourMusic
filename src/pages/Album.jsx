@@ -6,7 +6,7 @@ import MyCard from '../components/MyCard';
 import getMusics from '../services/musicsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -36,12 +36,16 @@ class Album extends React.Component {
     });
 
     const response = await getMusics(id);
+    const listOfResponse = await getFavoriteSongs();
+
+    const listOfIdFavoriteSongs = listOfResponse.map(({ trackId }) => trackId);
 
     this.setState(
       {
         loading: false,
         detailsOfAlbum: response[0], // o primeiro elemento da reposta é os detalhes.
         listOfMusic: response.filter((_currten, index) => index !== 0), // fiz isso pra pegar só as musicas.
+        listFavoritesSongs: [...listOfIdFavoriteSongs],
       },
       this.createObjectForCard,
     );
@@ -109,9 +113,7 @@ class Album extends React.Component {
                     trackName={ trackName }
                     trackId={ trackId }
                     handleCheck={ this.handleCheckFavorite }
-                    isItFavorit={ listFavoritesSongs.some(
-                      (element) => element === trackId,
-                    ) }
+                    isItFavorit={ listFavoritesSongs.includes(trackId) }
                   />
                 </Paper>
               ))}
