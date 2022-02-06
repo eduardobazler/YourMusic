@@ -6,7 +6,11 @@ import MyCard from '../components/MyCard';
 import getMusics from '../services/musicsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import {
+  addSong,
+  getFavoriteSongs,
+  removeSong,
+} from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -70,21 +74,39 @@ class Album extends React.Component {
     return objectSongDetails;
   };
 
-  handleCheckFavorite = async (event) => {
-    const songId = Number(event.target.value);
-    const { listFavoritesSongs } = this.state;
-    const objectMusic = this.findObjectMusicInList(songId);
-
+  removeSongOfListFavorites = async (id) => {
     this.setState({
       loading: true,
     });
-
-    await addSong(objectMusic);
+    await removeSong(id);
 
     this.setState({
       loading: false,
-      listFavoritesSongs: [...listFavoritesSongs, songId],
     });
+  };
+
+  handleCheckFavorite = async ({ target }) => {
+    const songId = Number(target.value);
+    const { listFavoritesSongs } = this.state;
+    const objectMusic = this.findObjectMusicInList(songId);
+
+    // se cair nesse if é pq a musica já está marcada!
+    if (!target.checked) {
+      this.removeSongOfListFavorites(objectMusic);
+      const indexOfSong = listFavoritesSongs.indexOf(songId);
+      listFavoritesSongs.splice(indexOfSong, 1);
+    } else {
+      this.setState({
+        loading: true,
+      });
+
+      await addSong(objectMusic);
+
+      this.setState({
+        loading: false,
+        listFavoritesSongs: [...listFavoritesSongs, songId],
+      });
+    }
   };
 
   render() {

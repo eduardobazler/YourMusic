@@ -54,6 +54,7 @@ class Search extends React.Component {
       responseAPIistrue: false,
     });
     const listOfAlbunsResponse = await searchAlbumsAPI(nameOfSearch);
+
     this.setState({
       APIisLoading: false,
       responseAPIistrue: true,
