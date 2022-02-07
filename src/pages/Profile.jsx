@@ -26,7 +26,6 @@ class Profile extends React.Component {
     });
 
     const currentUserResponse = await getUser();
-    console.log(currentUserResponse);
 
     this.setState({
       loading: false,
