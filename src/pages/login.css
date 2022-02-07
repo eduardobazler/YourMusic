@@ -1,0 +1,21 @@
+.main-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 480px;
+}
+
+.main-form input {
+  margin: 10px;
+  padding: 5px;
+  width: 400px;
+}
+
+.main-form button {
+  margin: 10px;
+  margin-bottom: 30px;
+  padding: 5px;
+  width: 400px;
+}

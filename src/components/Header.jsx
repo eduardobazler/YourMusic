@@ -37,13 +37,13 @@ class Header extends React.Component {
           )}
         </div>
         <div>
-          <button type="button">
+          <button type="button" className="btn btn-primary">
             <Link data-testid="link-to-search" to="/search">search</Link>
           </button>
-          <button type="button">
+          <button type="button" className="btn btn-primary">
             <Link data-testid="link-to-favorites" to="/favorites">favorites</Link>
           </button>
-          <button type="button">
+          <button type="button" className="btn btn-primary">
             <Link data-testid="link-to-profile" to="/profile">profile</Link>
           </button>
         </div>

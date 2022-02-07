@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../components/Loading';
+import './login.css';
 
 class Login extends React.Component {
   render() {
@@ -9,17 +10,18 @@ class Login extends React.Component {
       valueInput, buttonOff, clickLogin, loading, loginIsTrue } = this.props;
 
     return (
-      <div data-testid="page-login">
+      <main className="main-login" data-testid="page-login">
         <h1>Musicas da galera!</h1>
         {loginIsTrue && <Redirect to="/search" />}
 
         {loading ? (
           <Loading />
         ) : (
-          <form>
+          <form className="card main-form">
             <label htmlFor="userName">
               Nome:
               <input
+                className="form-control"
                 data-testid="login-name-input"
                 type="text"
                 id="userName"
@@ -29,6 +31,7 @@ class Login extends React.Component {
               />
             </label>
             <button
+              className="btn btn-primary"
               data-testid="login-submit-button"
               type="submit"
               disabled={ buttonOff }
@@ -38,7 +41,7 @@ class Login extends React.Component {
             </button>
           </form>
         )}
-      </div>
+      </main>
     );
   }
 }
