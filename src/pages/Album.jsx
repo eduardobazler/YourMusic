@@ -19,7 +19,7 @@ class Album extends React.Component {
     this.state = {
       loading: false,
       objectCardDetails: {},
-      detailsOfAlbum: [],
+      detailsOfAlbum: {},
       listOfMusic: [],
       listFavoritesSongs: [],
     };
@@ -48,7 +48,7 @@ class Album extends React.Component {
       {
         loading: false,
         detailsOfAlbum: response[0], // o primeiro elemento da reposta é os detalhes.
-        listOfMusic: response.filter((_currten, index) => index !== 0), // fiz isso pra pegar só as musicas.
+        listOfMusic: response.slice(1), // fiz isso pra pegar só as musicas.
         listFavoritesSongs: [...listOfIdFavoriteSongs],
       },
       this.createObjectForCard,
@@ -74,11 +74,11 @@ class Album extends React.Component {
     return objectSongDetails;
   };
 
-  removeSongOfListFavorites = async (id) => {
+  removeSongOfListFavorites = async (objectMusic) => {
     this.setState({
       loading: true,
     });
-    await removeSong(id);
+    await removeSong(objectMusic);
 
     this.setState({
       loading: false,

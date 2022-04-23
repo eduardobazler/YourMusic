@@ -11,7 +11,7 @@ class Search extends React.Component {
     super();
 
     this.state = {
-      buttonSearchTrue: true,
+      buttonSearchDisabled: true,
       nameOfBAnd: '',
       inputSearch: '',
       APIisLoading: false,
@@ -36,11 +36,11 @@ class Search extends React.Component {
     const minLength = 2;
     if (inputSearch.length >= minLength) {
       this.setState({
-        buttonSearchTrue: false,
+        buttonSearchDisabled: false,
       });
     } else {
       this.setState({
-        buttonSearchTrue: true,
+        buttonSearchDisabled: true,
       });
     }
   };
@@ -59,15 +59,8 @@ class Search extends React.Component {
       APIisLoading: false,
       responseAPIistrue: true,
       listOfAlbum: listOfAlbunsResponse,
-      listIsVoid: this.checkListOfResponseIsVoid(listOfAlbunsResponse),
+      listIsVoid: listOfAlbunsResponse.length === 0,
     });
-  };
-
-  checkListOfResponseIsVoid = (array) => {
-    if (array.length === 0) {
-      return true;
-    }
-    return false;
   };
 
   clearInput = () => {
@@ -81,7 +74,7 @@ class Search extends React.Component {
   render() {
     const {
       inputSearch,
-      buttonSearchTrue,
+      buttonSearchDisabled,
       APIisLoading,
       responseAPIistrue,
       nameOfBAnd,
@@ -97,7 +90,7 @@ class Search extends React.Component {
             <Loading />
           ) : (
             <Form
-              { ...{ inputSearch, buttonSearchTrue } }
+              { ...{ inputSearch, buttonSearchDisabled } }
               handleChange={ this.handleChangeInput }
               handleClick={ this.handleClick }
             />
